@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: slow-digest
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22.14.0
+      - key: DB_FILE
+        value: data/digest.db
+      # Render has no Ollama, so the app falls back to the rule-based digest.
+      # To use a model, point this at an Ollama server you host elsewhere.
+      # - key: OLLAMA_HOST
+      #   value: https://your-ollama-host

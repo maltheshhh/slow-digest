@@ -41,6 +41,12 @@ Copy `.env.example` to `.env` and export the values if you want to change the po
 
 Chat lines look like `[23/10/26, 21:04] Riya: message` (WhatsApp) or `Riya: message`.
 
+## Deploy to Render
+
+The repo includes a `render.yaml` blueprint. In Render choose New, Blueprint, and select this repo. Or create a Web Service by hand with build command `npm ci`, start command `npm start`, and `NODE_VERSION=22.14.0`.
+
+Render does not run Ollama, so the hosted app uses the rule-based digest. Digest history lives in SQLite on the free plan's temporary disk and resets on redeploy. To use a model on the hosted app, run Ollama on a machine you control and set `OLLAMA_HOST` to its URL.
+
 ## Overnight mode
 
 `scripts/sloth_digest.py` does the same job from the command line with no dependencies, so cron can run it while you sleep:
