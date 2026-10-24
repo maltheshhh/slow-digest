@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slow Digest</title>
+<meta name="description" content="A two-line morning summary of your group chat, written by an open-weight model running on your own machine.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <span class="label">Hacktoberfest Open-Source AI · Week 3 · Slow and Steady</span>
+  <h1>Slow Digest</h1>
+  <p class="lede">Your group chat talks all night. Slow Digest reads it for you and leaves two lines on your desk by morning.</p>
+  <div class="track" aria-hidden="true">
+    <div class="branch"></div>
+    <i class="leaf" style="left:14%"></i><i class="leaf" style="left:37%"></i><i class="leaf" style="left:61%"></i><i class="leaf" style="left:86%"></i>
+    <svg class="sloth" id="sloth" viewBox="0 0 46 46">
+      <ellipse cx="23" cy="30" rx="17" ry="11" fill="#8B6B47"/>
+      <circle cx="23" cy="20" r="12" fill="#B79A74"/>
+      <ellipse cx="17.5" cy="19" rx="4.2" ry="5.4" fill="#3A2C1E" transform="rotate(-18 17.5 19)"/>
+      <ellipse cx="28.5" cy="19" rx="4.2" ry="5.4" fill="#3A2C1E" transform="rotate(18 28.5 19)"/>
+      <circle cx="17.8" cy="19" r="1.3" fill="#F2F5EC"/><circle cx="28.2" cy="19" r="1.3" fill="#F2F5EC"/>
+      <ellipse cx="23" cy="24" rx="2.4" ry="1.6" fill="#3A2C1E"/>
+      <path d="M20.5 27 Q23 29 25.5 27" stroke="#3A2C1E" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="odo">Sloth distance since you opened this page: <b id="dist">0.00 m</b> <span>(assumed 4 m/min)</span></div>
+</header>
+
+<section class="tool" aria-labelledby="t1">
+  <div>
+    <span class="label">Try it</span>
+    <h2 id="t1">Paste a chat. Get the two lines that matter.</h2>
+  </div>
+  <div class="status" id="status" role="status"><i class="dot"></i><span>Checking for a local model…</span></div>
+  <div class="panes">
+    <div class="pane">
+      <label class="label" for="chat">Chat export (sample, replace with yours)</label>
+      <textarea id="chat" spellcheck="false">[23/10/26, 21:04] Riya: ok so lab record submission is moved to Monday 9 am, bring the printed copy
+[23/10/26, 21:06] Dev: lol that sticker pack is wild
+[23/10/26, 21:07] Dev: anyone watching the match tonight
+[23/10/26, 21:15] Aman: Riya the printed copy needs the signed cover page too right?
+[23/10/26, 21:16] Riya: yes, HOD signature on the cover page, deadline for that is Sunday 6 pm
+[23/10/26, 21:40] Meera: haha who changed the group icon
+[23/10/26, 22:02] Dev: I can collect signatures from the department tomorrow, meet at canteen at 11
+[23/10/26, 22:03] Aman: perfect, I'll bring the cover pages
+[23/10/26, 22:30] Meera: lol goodnight everyone
+[23/10/26, 23:11] Dev: also pay the 150 rupees fest fee to Riya before Monday</textarea>
+    </div>
+    <div class="pane">
+      <span class="label">Morning digest</span>
+      <div class="out" id="out" aria-live="polite"></div>
+    </div>
+  </div>
+  <div class="row">
+    <button class="primary" id="go" type="button">Digest it</button>
+    <label class="mode" for="mode">Engine
+      <select id="mode">
+        <option value="auto">Auto (model, else rules)</option>
+        <option value="model">Local model only</option>
+        <option value="rules">Rules only</option>
+      </select>
+    </label>
+    <button class="ghost" id="clear" type="button">Clear</button>
+  </div>
+</section>
+
+<section class="cols" aria-labelledby="t2">
+  <div class="why">
+    <div><span class="label">Open by design</span><h2 id="t2">Why the model is open</h2></div>
+    <div><strong>Chats stay on your machine</strong><span>Group chats hold other people's messages. A local model reads them without sending a word to a server you do not control.</span></div>
+    <div><strong>Works with the wifi off</strong><span>The server talks to Ollama on localhost. The rule-based digest keeps working even when no model is installed.</span></div>
+    <div><strong>Swap the brain</strong><span>Set <code>OLLAMA_MODEL</code> or pick a model per request. Try a smaller one for speed or a larger one for nuance.</span></div>
+    <div><strong>Costs nothing per run</strong><span>No API key, no meter running while you sleep.</span></div>
+  </div>
+  <div class="pipe">
+    <span class="label">History (stored in local SQLite)</span>
+    <ul class="history" id="history"><li class="note">No digests yet.</li></ul>
+    <button class="ghost" id="wipe" type="button">Clear history</button>
+  </div>
+</section>
+
+<footer>Slow Digest · built for DEV Hacktoberfest Open-Source AI Challenge Week 3</footer>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

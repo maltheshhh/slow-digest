@@ -1,0 +1,20 @@
+{
+  "name": "slow-digest",
+  "version": "1.0.0",
+  "description": "Slow Digest: a two-line morning summary of your group chat, written by an open-weight model running locally via Ollama.",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "keywords": ["ollama", "open-source-ai", "local-llm", "express", "hacktoberfest"],
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
